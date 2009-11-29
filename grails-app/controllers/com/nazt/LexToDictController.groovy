@@ -1,5 +1,5 @@
 package com.nazt
-
+import groovyx.net.http.*;
 class LexToDictController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -12,7 +12,36 @@ class LexToDictController {
         params.max = Math.min(params.max ? params.max.toInteger() : 10, 100)
         [lexToDictInstanceList: LexToDict.list(params), lexToDictInstanceTotal: LexToDict.count()]
     }
+	def remote = { }
+	def getRemoteFile = { 
+		try {
+			def http = new HTTPBuilder( params.url)
+			http.request(Method.GET,ContentType.TEXT) { req ->		
+			  headers.'User-Agent' = 'Mozilla/5.0'
 
+			  response.success = { resp, reader ->
+			    println "My response handler got response: ${resp.statusLine}"
+			    println "Response length: ${resp.headers.'Content-Length'}"
+				reader.getText().eachLine{    
+					try {
+							new LexToDict(vocaburary:it.toString().trim()).save() 
+						} 
+					catch(Exception e) {
+						println 'exception caught !'
+					}
+				}
+ 			}
+			  response.'404' = { resp -> 
+			    render 'Not found'
+			  }
+			}		
+		}
+		catch(Exception e) {
+			flash.defaultMessage = "book deleted"
+            redirect(action: "remote")
+		}
+			println 'end ja'
+		 }
     def create = {
         def lexToDictInstance = new LexToDict()
         lexToDictInstance.properties = params
