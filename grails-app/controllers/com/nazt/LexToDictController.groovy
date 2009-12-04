@@ -25,6 +25,7 @@ class LexToDictController {
 				reader.getText().eachLine{    
 					try {
 							new LexToDict(vocaburary:it.toString().trim()).save() 
+/*							lextoObj.addDict()*/
 						} 
 					catch(Exception e) {
 						println 'exception caught !'
@@ -41,6 +42,7 @@ class LexToDictController {
             redirect(action: "remote")
 		}
 			println 'end ja'
+		redirect(action:"list")
 		 }
     def create = {
         def lexToDictInstance = new LexToDict()
