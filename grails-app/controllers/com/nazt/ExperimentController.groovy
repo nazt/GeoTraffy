@@ -29,19 +29,16 @@ class ExperimentController {
 				Experiment experiment_tmp=new Experiment(name:params.experimentName,total:0).save()
 			loaded_data.eachLine{    
 					try {
-						servletContext.lextoObj.wordInstance(it.trim())
-						myTypeList = servletContext.lextoObj.getTypeList()
-						myIndexList=servletContext.lextoObj.getIndexList()
+							servletContext.lextoObj.wordInstance(it.trim())
+							myTypeList = servletContext.lextoObj.getTypeList()
+							myIndexList=servletContext.lextoObj.getIndexList()
 
-						def indexer=0
-						def longlexnews=""
-						myIndexList.eachWithIndex{ val, idx ->
-						longlexnews+= it[indexer..val-1] + "|"
-						indexer=val
+							def indexer=0
+							def longlexnews=""
+							myIndexList.eachWithIndex{ val, idx ->
+							longlexnews+= it[indexer..val-1] + "|"
+							indexer=val
 						}
-						//new News(news:line,lexnews:longlexnews,corrected:false).save()
-
-/*						render longlexnews + "nat2<br>\n"*/
 						new DataKeeper(rawText:it.trim(),tokenizedText:longlexnews,experiment:experiment_tmp).save()
 							println it.trim();
 							++counter;
@@ -52,8 +49,12 @@ class ExperimentController {
 					}
 				}
 				println counter
-				experiment_tmp.total=counter;
-				experiment_tmp.save();
+				if(counter>0)
+				{
+					experiment_tmp.total=counter
+					experiment_tmp.save()
+				}
+				else experiment_tmp.delete()
 			
  			}
 			  response.'404' = { resp -> 
