@@ -25,10 +25,11 @@ class LexToDictController {
 				reader.getText().eachLine{    
 					try {
 							new LexToDict(vocaburary:it.toString().trim()).save() 
-/*							lextoObj.addDict()*/
+						servletContext.lextoObj.addDict(it.toString().trim())
 						} 
 					catch(Exception e) {
 						println 'exception caught !'
+						println e
 					}
 				}
  			}
@@ -54,6 +55,7 @@ class LexToDictController {
         def lexToDictInstance = new LexToDict(params)
         if (lexToDictInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'lexToDict.label', default: 'LexToDict'), lexToDictInstance.id])}"
+			servletContext.lextoObj.addDict(it.toString().trim())
             redirect(action: "show", id: lexToDictInstance.id)
         }
         else {
