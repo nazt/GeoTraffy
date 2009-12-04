@@ -25,16 +25,30 @@ class ExperimentController {
 			
 				def loaded_data=reader.getText()
 				def counter=0
-				Experiment experiment_tmp=new Experiment(name:params.experimentName,total:0)
+				def myTypeList,myIndexList=[]
+				Experiment experiment_tmp=new Experiment(name:params.experimentName,total:0).save()
 			loaded_data.eachLine{    
 					try {
-						//	new LexToDict(vocaburary:it.toString().trim()).save() 
-/*							new */
+						servletContext.lextoObj.wordInstance(it.trim())
+						myTypeList = servletContext.lextoObj.getTypeList()
+						myIndexList=servletContext.lextoObj.getIndexList()
+
+						def indexer=0
+						def longlexnews=""
+						myIndexList.eachWithIndex{ val, idx ->
+						longlexnews+= it[indexer..val-1] + "|"
+						indexer=val
+						}
+						//new News(news:line,lexnews:longlexnews,corrected:false).save()
+
+/*						render longlexnews + "nat2<br>\n"*/
+						new DataKeeper(rawText:it.trim(),tokenizedText:longlexnews,experiment:experiment_tmp).save()
 							println it.trim();
 							++counter;
 						} 
 					catch(Exception e) {
 						println 'exception caught !'
+						println e
 					}
 				}
 				println counter
@@ -54,6 +68,8 @@ class ExperimentController {
           //  redirect(action: "remote")
 		}
 			println 'end ja'
+			redirect(action:list)
+			
 	}
 		
     def create = {
