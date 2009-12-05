@@ -63,7 +63,7 @@
                             <td valign="top" class="value"><g:link controller="experiment" action="show" id="${dataKeeperInstance?.experiment?.id}">${dataKeeperInstance?.experiment?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
-						<g:set var="diffList" value="${dataKeeperInstance.solution.word-dataKeeperInstance.tokenizedText.replaceAll(' ','').tokenize('|')}"></g:set>     
+					
                        <!-- <tr class="prop">
                             <td valign="top" class="name"><g:message code="dataKeeper.solution.label" default="Not Found" /></td>
 
@@ -97,7 +97,7 @@
                                    
 									<g:if test="${diffList.toString().contains(s.word) }">
 										  <div class="errors">
- 											----- <g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
+ 										  ﻿----- <g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
 										 </div>
 									</g:if>
 									<g:else>
@@ -106,6 +106,7 @@
 										</div>
 									</g:else>
                                 </g:each>
+<g:link controller="solution" action="create" params="['dataKeeper.id': dataKeeperInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solution.label', default: 'Solution')])}</g:link>
                                 </ul>
                             </td>
                             

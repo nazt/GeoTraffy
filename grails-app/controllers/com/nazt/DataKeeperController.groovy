@@ -32,12 +32,26 @@ class DataKeeperController {
 
     def show = {
         def dataKeeperInstance = DataKeeper.get(params.id)
+		println dataKeeperInstance.solution
         if (!dataKeeperInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'dataKeeper.label', default: 'DataKeeper'), params.id])}"
             redirect(action: "list")
         }
         else {
-            [dataKeeperInstance: dataKeeperInstance]
+/*		<g:set var="diffList" value="${dataKeeperInstance.solution.word-dataKeeperInstance.tokenizedText.replaceAll(' ','').tokenize('|')}"></g:set>     */
+			def diffList = dataKeeperInstance.solution.word-dataKeeperInstance.tokenizedText.replaceAll(' ','').tokenize('|')	
+			dataKeeperInstance.solution.each { 
+				if( diffList.toString().contains(it.word) ) 
+				{
+					it.found=false;
+				}
+				else
+				{
+					it.found=true;
+					it.save();
+				}
+			}
+            [dataKeeperInstance: dataKeeperInstance,diffList: diffList]
         }
     }
 
