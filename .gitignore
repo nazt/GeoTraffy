@@ -1,3 +1,4 @@
 *.class
 stacktrace.log
+target/stacktrace.log
 .DS_Store
