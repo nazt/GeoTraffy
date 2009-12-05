@@ -1,2 +1,3 @@
+*.class
 stacktrace.log
 .DS_Store
