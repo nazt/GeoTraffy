@@ -20,14 +20,24 @@ class SolutionController {
     }
 
     def save = {
-        def solutionInstance = new Solution(params)
-        if (solutionInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'solution.label', default: 'Solution'), solutionInstance.id])}"
-            redirect(action: "show", id: solutionInstance.id)
-        }
-        else {
-            render(view: "create", model: [solutionInstance: solutionInstance])
-        }
+/*		params.word=['a','b','c']*/
+		println params
+		params.word.tokenize(',').each { 
+			params.word=it	
+	        def solutionInstance = new Solution(params)
+			println params
+			println solutionInstance
+	        if (solutionInstance.save(flush: true)) {
+	            flash.message = "${message(code: 'default.created.message', args: [message(code: 'solution.label', default: 'Solution'), solutionInstance.id])}"
+	/*            redirect(action: "show", id: solutionInstance.id)*/
+				println 'ok'
+	        }
+	        else {
+	//            render(view: "create", model: [solutionInstance: solutionInstance])
+				  println 'error'
+	        }
+ 		}
+ 		redirect(action: "show")
     }
 
     def show = {
