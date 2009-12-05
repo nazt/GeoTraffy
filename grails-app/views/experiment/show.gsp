@@ -70,6 +70,19 @@
                             
                         </tr>
                     
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="experiment.solution.label" default="Solution" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${experimentInstance.solution}" var="s">
+                                    <li><g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
+                    
                     </tbody>
                 </table>
             </div>
