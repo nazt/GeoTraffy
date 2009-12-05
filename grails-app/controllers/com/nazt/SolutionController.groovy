@@ -37,7 +37,13 @@ class SolutionController {
 				  println 'error'
 	        }
  		}
- 		redirect(action: "show")
+		if(params.fromKeeper)
+		{
+	 		redirect(controller:"dataKeeper",action:"show",id:params.fromKeeper)
+			
+		}
+		else
+			redirect(action: "show")
     }
 
     def show = {

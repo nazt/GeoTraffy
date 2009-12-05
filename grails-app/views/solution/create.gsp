@@ -37,22 +37,24 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
+                            <!-- <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="found"><g:message code="solution.found.label" default="Found" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'found', 'errors')}">
                                     <g:checkBox name="found" value="${solutionInstance?.found}" />
                                 </td>
-                            </tr>
+                            </tr> -->
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="data"><g:message code="solution.data.label" default="Data" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'data', 'errors')}">
+									${params.dataKeeper?.id}
                                     <g:if test="${params.dataKeeper?.id}">
-	<g:hiddenField name="data.id" value="${params.dataKeeper?.id}" />
+											<g:hiddenField name="data.id" value="${params.dataKeeper?.id}" />
+											<g:hiddenField name="fromKeeper" value="${params.dataKeeper?.id}" />
                                     </g:if>
 									<g:else>
 										<g:select name="data.id" from="${com.nazt.DataKeeper.list()}" optionKey="id" value="${solutionInstance?.data?.id}"  />
