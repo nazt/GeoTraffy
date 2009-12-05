@@ -64,21 +64,21 @@
                             
                         </tr>
 						<g:set var="diffList" value="${dataKeeperInstance.solution.word-dataKeeperInstance.tokenizedText.replaceAll(' ','').tokenize('|')}"></g:set>     
-                       <tr class="prop">
+                       <!-- <tr class="prop">
                             <td valign="top" class="name"><g:message code="dataKeeper.solution.label" default="Not Found" /></td>
 
                             <td valign="top" style="text-align: left;" class="value">
-       							${diffList}
+       							${diffList.sort()}
                             </td>
 
-                        </tr>       
+                        </tr>        -->
                       <tr class="prop">
                             <td valign="top" class="name"><g:message code="dataKeeper.solution.label" default="Correctness" /></td>
 
                             <td valign="top" style="text-align: left;" class="value">
 								<g:if test="${dataKeeperInstance.solution.size() >0}">
 								    
-		       						${dataKeeperInstance.solution.size()-diffList.size()}/${dataKeeperInstance.solution.size()} = ${(dataKeeperInstance.solution.size()-diffList.size())/dataKeeperInstance.solution.size()*100 as float}%
+		       						${dataKeeperInstance.solution.size()-diffList.size()}/${dataKeeperInstance.solution.size()} =   ${(dataKeeperInstance.solution.size()-diffList.size())/dataKeeperInstance.solution.size()*100 as float}%  
 								</g:if>
 								<g:else>
 								     I don't have any solution !
@@ -93,8 +93,18 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
           <ul>
-                                <g:each in="${dataKeeperInstance.solution.sort{it.word}}" var="s">
-                                    <li><g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+                                <g:each in="${dataKeeperInstance.solution.sort{it.id}}" var="s">
+                                   
+									<g:if test="${diffList.toString().contains(s.word) }">
+										  <div class="errors">
+ 											----- <g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
+										 </div>
+									</g:if>
+									<g:else>
+										<div class="message">
+											<g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+										</div>
+									</g:else>
                                 </g:each>
                                 </ul>
                             </td>
