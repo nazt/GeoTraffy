@@ -16,35 +16,39 @@ class SolutionController {
     def create = {
         def solutionInstance = new Solution()
         solutionInstance.properties = params
-        return [solutionInstance: solutionInstance]
+		def dataKeeperInstance = DataKeeper.get(params.dataKeeper.id)
+		println dataKeeperInstance
+        return [solutionInstance: solutionInstance,dataKeeperInstance:dataKeeperInstance]
     }
 
-    def save = {
-/*		params.word=['a','b','c']*/
-		println params
-		params.word.tokenize(',').each { 
-			params.word=it	
-	        def solutionInstance = new Solution(params)
+	    def save = {
+	/*		params.word=['a','b','c']*/
 			println params
-			println solutionInstance
-	        if (solutionInstance.save(flush: true)) {
-	            flash.message = "${message(code: 'default.created.message', args: [message(code: 'solution.label', default: 'Solution'), solutionInstance.id])}"
-	/*            redirect(action: "show", id: solutionInstance.id)*/
-				println 'ok'
-	        }
-	        else {
-	//            render(view: "create", model: [solutionInstance: solutionInstance])
-				  println 'error'
-	        }
- 		}
-		if(params.fromKeeper)
-		{
-	 		redirect(controller:"dataKeeper",action:"show",id:params.fromKeeper)
-			
-		}
-		else
-			redirect(action: "show")
-    }
+			params.word.tokenize(',').each { 
+				params.word=it	
+		        def solutionInstance = new Solution(params)
+				println params
+				println solutionInstance
+		        if (solutionInstance.save(flush: true)) {
+		            flash.message = "${message(code: 'default.created.message', args: [message(code: 'solution.label', default: 'Solution'), solutionInstance.id])}"
+		/*            redirect(action: "show", id: solutionInstance.id)*/
+					println 'ok'
+		        }
+		        else {
+		//            render(view: "create", model: [solutionInstance: solutionInstance])
+					  println 'error'
+		        }
+	 		}
+			if(params.fromKeeper)
+			{
+		 		redirect(controller:"dataKeeper",action:"show",id:params.fromKeeper)
+
+			}
+			else
+				redirect(action: "show")
+	   }
+
+		
 
     def show = {
         def solutionInstance = Solution.get(params.id)

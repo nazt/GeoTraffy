@@ -50,6 +50,15 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                  <label for="experiment"><g:message code="solution.experiment.label" default="Experiment" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'experiment', 'errors')}">
+                                    <g:select name="experiment.id" from="${com.nazt.Experiment.list()}" optionKey="id" value="${solutionInstance?.experiment?.id}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                   <label for="data"><g:message code="solution.data.label" default="Data" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'data', 'errors')}">

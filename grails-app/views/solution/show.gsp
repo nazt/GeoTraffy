@@ -44,6 +44,13 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="solution.experiment.label" default="Experiment" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="experiment" action="show" id="${solutionInstance?.experiment?.id}">${solutionInstance?.experiment?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="solution.data.label" default="Data" /></td>
                             
                             <td valign="top" class="value"><g:link controller="dataKeeper" action="show" id="${solutionInstance?.data?.id}">${solutionInstance?.data?.encodeAsHTML()}</g:link></td>

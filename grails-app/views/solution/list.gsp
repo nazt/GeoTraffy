@@ -28,6 +28,8 @@
                         
                             <g:sortableColumn property="found" title="${message(code: 'solution.found.label', default: 'Found')}" />
                         
+                            <th><g:message code="solution.experiment.label" default="Experiment" /></th>
+                   	    
                             <th><g:message code="solution.data.label" default="Data" /></th>
                    	    
                         </tr>
@@ -41,6 +43,8 @@
                             <td>${fieldValue(bean: solutionInstance, field: "word")}</td>
                         
                             <td><g:formatBoolean boolean="${solutionInstance.found}" /></td>
+                        
+                            <td>${fieldValue(bean: solutionInstance, field: "experiment")}</td>
                         
                             <td>${fieldValue(bean: solutionInstance, field: "data")}</td>
                         
