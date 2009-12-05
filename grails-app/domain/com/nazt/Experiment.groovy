@@ -1,6 +1,8 @@
 package com.nazt
 
 class Experiment {
+	static hasMany = [data:DataKeeper]
+    
 	String name = '[Experiment #]'
 	Integer total
 	Date dateCreated
