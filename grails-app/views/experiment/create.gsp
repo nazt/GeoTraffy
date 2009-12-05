@@ -45,6 +45,24 @@
                                 </td>
                             </tr>
                         
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="lastUpdated"><g:message code="experiment.lastUpdated.label" default="Last Updated" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: experimentInstance, field: 'lastUpdated', 'errors')}">
+                                    <g:datePicker name="lastUpdated" precision="day" value="${experimentInstance?.lastUpdated}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="dateCreated"><g:message code="experiment.dateCreated.label" default="Date Created" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: experimentInstance, field: 'dateCreated', 'errors')}">
+                                    <g:datePicker name="dateCreated" precision="day" value="${experimentInstance?.dateCreated}"  />
+                                </td>
+                            </tr>
+                        
                         </tbody>
                     </table>
                 </div>

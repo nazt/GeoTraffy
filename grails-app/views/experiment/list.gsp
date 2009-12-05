@@ -28,6 +28,10 @@
                         
                             <g:sortableColumn property="total" title="${message(code: 'experiment.total.label', default: 'Total')}" />
                         
+                            <g:sortableColumn property="lastUpdated" title="${message(code: 'experiment.lastUpdated.label', default: 'Last Updated')}" />
+                        
+                            <g:sortableColumn property="dateCreated" title="${message(code: 'experiment.dateCreated.label', default: 'Date Created')}" />
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +43,10 @@
                             <td>${fieldValue(bean: experimentInstance, field: "name")}</td>
                         
                             <td>${fieldValue(bean: experimentInstance, field: "total")}</td>
+                        
+                            <td><g:formatDate date="${experimentInstance.lastUpdated}" /></td>
+                        
+                            <td><g:formatDate date="${experimentInstance.dateCreated}" /></td>
                         
                         </tr>
                     </g:each>
