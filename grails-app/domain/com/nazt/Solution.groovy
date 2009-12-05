@@ -5,7 +5,7 @@ class Solution {
 	String word
 	Boolean found = false
     static constraints = {
-	word(nullable:false,blank:false,unique:true)
+	word(nullable:false,blank:false,unique:false)
 	found()
     }
 	String toString()
