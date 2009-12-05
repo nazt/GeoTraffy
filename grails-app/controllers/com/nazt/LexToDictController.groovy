@@ -54,8 +54,9 @@ class LexToDictController {
     def save = {
         def lexToDictInstance = new LexToDict(params)
         if (lexToDictInstance.save(flush: true)) {
+		//	println params
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'lexToDict.label', default: 'LexToDict'), lexToDictInstance.id])}"
-			servletContext.lextoObj.addDict(it.toString().trim())
+			servletContext.lextoObj.addDict(params.vocaburary.trim())
             redirect(action: "show", id: lexToDictInstance.id)
         }
         else {
