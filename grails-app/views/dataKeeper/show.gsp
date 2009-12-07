@@ -97,16 +97,29 @@
                                    
 									<g:if test="${diffList.toString().contains(s.word) }">
 										  <div class="errors">
- 										  ﻿----- <g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
+											<li>
+ 												<g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
+
+										</li>
 										 </div>
 									</g:if>
 									<g:else>
 										<div class="message">
-											<g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+
+											<g:link controller="solution" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
+
 										</div>
 									</g:else>
                                 </g:each>
-<g:link controller="solution" action="create" params="['dataKeeper.id': dataKeeperInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solution.label', default: 'Solution')])}</g:link>
+								<g:if test="${dataKeeperInstance.solution.size()==0}">
+									<span class="menuButton">
+									<g:link class="create" controller="solution" action="create" params="['dataKeeper.id': dataKeeperInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'solution.label', default: 'Solution')])}</g:link>
+									</span>
+		
+						</g:if>
+						 	<span class="menuButton">
+								<g:link class="list"  controller="experiment" class="list" action="show" id="${dataKeeperInstance?.experiment?.id}">${dataKeeperInstance?.experiment?.encodeAsHTML()}</g:link>
+							</span>
                                 </ul>
                             </td>
                             
@@ -119,7 +132,9 @@
                 <g:form>
                     <g:hiddenField name="id" value="${dataKeeperInstance?.id}" />
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					</span>
+ 
                 </g:form>
             </div>
         </div>
