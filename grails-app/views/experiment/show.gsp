@@ -74,8 +74,16 @@
                             <td valign="top" class="name"><g:message code="experiment.solution.label" default="Overall" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
-              				${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
- 	${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %
+
+							<g:if test="${experimentInstance.solution.size() >0}">
+							    ${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
+						${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %
+
+							</g:if>
+							<g:else>
+							     not process yet!<br><br>Add Solution First
+							</g:else>
+
                             </td>
                             
                         </tr>

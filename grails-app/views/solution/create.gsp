@@ -26,7 +26,14 @@
                 <div class="dialog">
                     <table>
                         <tbody>
-                        
+		                  <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="TokenizedText"><g:message code="solution.TokenizedText.label" default="TokenizedText" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'word', 'errors')}">
+                                   ${dataKeeperInstance.tokenizedText}
+                                </td>
+                            </tr>
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="word"><g:message code="solution.word.label" default="Word" /></label>
@@ -35,15 +42,7 @@
                                     <g:textField name="word" value="${solutionInstance?.word}" />
                                 </td>
                             </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="found"><g:message code="solution.found.label" default="Found" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'found', 'errors')}">
-                                    <g:checkBox name="found" value="${solutionInstance?.found}" />
-                                </td>
-                            </tr>
+ 
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
@@ -51,7 +50,7 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'experiment', 'errors')}">
 									
-                                    <g:select name="experiment.id" from="${dataKeeperInstance.experiment}" optionKey="id" value="${dataKeeperInstance.experiment.id}"  />
+                                    <g:select name="experiment.id" from="${dataKeeperInstance?.experiment}" optionKey="id" value="${dataKeeperInstance?.experiment?.id}"  />
                                 </td>
                             </tr>
                         

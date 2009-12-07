@@ -16,8 +16,9 @@ class SolutionController {
     def create = {
         def solutionInstance = new Solution()
         solutionInstance.properties = params
-		def dataKeeperInstance = DataKeeper.get(params.dataKeeper.id)
+		def dataKeeperInstance = DataKeeper?.get(params.dataKeeper?.id)
 		println dataKeeperInstance
+ 
         return [solutionInstance: solutionInstance,dataKeeperInstance:dataKeeperInstance]
     }
 
