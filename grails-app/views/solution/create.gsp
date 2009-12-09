@@ -31,7 +31,7 @@
                                     <label for="TokenizedText"><g:message code="solution.TokenizedText.label" default="TokenizedText" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'word', 'errors')}">
-                                   ${dataKeeperInstance.tokenizedText}
+                                   ${dataKeeperInstance?.tokenizedText}
                                 </td>
                             </tr>
                             <tr class="prop">
@@ -39,7 +39,7 @@
                                     <label for="word"><g:message code="solution.word.label" default="Word" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: solutionInstance, field: 'word', 'errors')}">
-                                    <g:textField name="word" value="${solutionInstance?.word}" />
+                                    <g:textField name="word" value="${solutionInstance?.word}" width="155" />
                                 </td>
                             </tr>
  
