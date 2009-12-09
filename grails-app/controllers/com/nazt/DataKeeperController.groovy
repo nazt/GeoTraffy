@@ -16,6 +16,7 @@ class DataKeeperController {
     def create = {
         def dataKeeperInstance = new DataKeeper()
         dataKeeperInstance.properties = params
+ 
         return [dataKeeperInstance: dataKeeperInstance]
     }
 
@@ -38,12 +39,12 @@ class DataKeeperController {
             redirect(action: "list")
         }
         else {
-/*		<g:set var="diffList" value="${dataKeeperInstance.solution.word-dataKeeperInstance.tokenizedText.replaceAll(' ','').tokenize('|')}"></g:set>     */
-			def diffList = dataKeeperInstance.solution.word-dataKeeperInstance.tokenizedText.replaceAll(' ','').tokenize('|')	
+			def diffList = dataKeeperInstance.solution.word-dataKeeperInstance.tokenizedText.tokenize('|')	
 			dataKeeperInstance.solution.each { 
-				if( diffList.toString().contains(it.word) ) 
+				if( diffList.toString().contains(it.word.trim()) ) 
 				{
 					it.found=false;
+					new LexToDict(vocaburary:it.toString().trim()).save() 
 				}
 				else
 				{
