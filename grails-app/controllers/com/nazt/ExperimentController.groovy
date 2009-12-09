@@ -26,7 +26,7 @@ class ExperimentController {
 				def loaded_data=reader.getText()
 				def counter=0
 				def myTypeList,myIndexList=[]
-				Experiment experiment_tmp=new Experiment(name:params.experimentName,total:0).save()
+				Experiment experiment_tmp=new Experiment(name:params.experimentName,total:0,totalInDict:LexToDict.list().size()).save()
 			loaded_data.eachLine{    
 					try {
 							servletContext.lextoObj.wordInstance(it.trim())

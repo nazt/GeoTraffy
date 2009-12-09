@@ -28,8 +28,10 @@
                         
                             <g:sortableColumn property="total" title="${message(code: 'experiment.total.label', default: 'Total')}" />
                         
-                            <g:sortableColumn property="lastUpdated" title="${message(code: 'experiment.lastUpdated.label', default: 'Last Updated')}" />
+                            <g:sortableColumn property="correctness" title="${message(code: 'experiment.lastUpdated.label', default: 'Correctness')}" />
                         
+                            <g:sortableColumn property="dateCreated" title="${message(code: 'experiment.dateCreated.label', default: 'Total in Dictionary')}" />
+
                             <g:sortableColumn property="dateCreated" title="${message(code: 'experiment.dateCreated.label', default: 'Date Created')}" />
                         
                         </tr>
@@ -44,9 +46,15 @@
                         
                             <td>${fieldValue(bean: experimentInstance, field: "total")}</td>
                         
-                            <td><g:formatDate date="${experimentInstance.lastUpdated}" /></td>
-                        
+                            <td>  
+								<g:if test="${experimentInstance.solution.size()>0}">
+									${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
+								${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %									
+								</g:if>	
+							</td>
+							<td>${experimentInstance.totalInDict}</td>                        
                             <td><g:formatDate date="${experimentInstance.dateCreated}" /></td>
+
                         
                         </tr>
                     </g:each>

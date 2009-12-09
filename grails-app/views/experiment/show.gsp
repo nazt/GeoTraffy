@@ -42,6 +42,24 @@
                             <td valign="top" class="value">${fieldValue(bean: experimentInstance, field: "total")}</td>
                             
                         </tr>
+                      <tr class="prop">
+                            <td valign="top" class="name"><g:message code="experiment.solution.label" default="Overall" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+              			
+							<g:if test="${experimentInstance.solution.size() >0}">
+							<div class="message">
+							    ${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
+						${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %
+
+							</g:if>
+							<g:else>
+							     not process yet!<br><br>Add Solution First
+							</g:else>
+							</div>
+                            </td>
+                            
+                        </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="experiment.data.label" default="Data" /></td>
@@ -49,7 +67,16 @@
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
                                 <g:each in="${experimentInstance.data.sort { it.id } }" var="d">
-                                    <li><g:link controller="dataKeeper" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
+								<g:if test="${d.solution}">
+									<div class="prop">
+                                    	<li><g:link controller="dataKeeper" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></li>
+									</div>
+								</g:if>
+								<g:else>
+										<div class="prop">
+										<li><g:link  controller="dataKeeper" action="show" id="${d.id}">${d?.encodeAsHTML()}*</g:link></li>
+										</div>
+								</g:else>
                                 </g:each>
                                 </ul>
                             </td>
@@ -73,18 +100,19 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="experiment.solution.label" default="Overall" /></td>
                             
-                            <td valign="top" style="text-align: left;" class="value">
+	                            <td valign="top" style="text-align: left;" class="value">
 
-							<g:if test="${experimentInstance.solution.size() >0}">
-							    ${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
-						${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %
+								<g:if test="${experimentInstance.solution.size() >0}">
+								<div class="message">
+								    ${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
+							${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %
 
-							</g:if>
-							<g:else>
-							     not process yet!<br><br>Add Solution First
-							</g:else>
-
-                            </td>
+								</g:if>
+								<g:else>
+								     not process yet!<br><br>Add Solution First
+								</g:else>
+								</div>
+	                            </td>
                             
                         </tr>
                     

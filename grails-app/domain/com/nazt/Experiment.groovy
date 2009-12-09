@@ -5,6 +5,7 @@ class Experiment {
     
 	String name = '[Experiment #]'
 	Integer total
+	Integer totalInDict
 	Date dateCreated
 	Date lastUpdated	
     static constraints = {
