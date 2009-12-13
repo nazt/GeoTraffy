@@ -44,6 +44,7 @@ class DataKeeperController {
 				if( diffList.toString().contains(it.word.trim()) ) 
 				{
 					it.found=false;
+					servletContext.lextoObj.addDict(it.toString().trim())
 					new LexToDict(vocaburary:it.toString().trim()).save() 
 				}
 				else
