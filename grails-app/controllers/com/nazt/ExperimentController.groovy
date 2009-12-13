@@ -40,7 +40,6 @@ class ExperimentController {
 							indexer=val
 						}
 						new DataKeeper(rawText:it.trim(),tokenizedText:longlexnews,experiment:experiment_tmp).save()
-							println it.trim();
 							++counter;
 						} 
 					catch(Exception e) {
