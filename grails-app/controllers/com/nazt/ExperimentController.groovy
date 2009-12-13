@@ -68,7 +68,7 @@ class ExperimentController {
           //  redirect(action: "remote")
 		}
 			println 'end ja'
-			redirect(controller:"dataKeeper",action:"list")
+			redirect(action:"list")
 			
 			
 	}
