@@ -50,7 +50,7 @@
 							<g:if test="${experimentInstance.solution.size() >0}">
 							<div class="message">
 							    ${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
-						${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %
+						${(experimentInstance.correctness)} %
 
 							</g:if>
 							<g:else>
@@ -105,7 +105,7 @@
 								<g:if test="${experimentInstance.solution.size() >0}">
 								<div class="message">
 								    ${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
-							${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %
+							${(experimentInstance.correctness)} %
 
 								</g:if>
 								<g:else>

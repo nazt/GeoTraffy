@@ -17,18 +17,14 @@ class SolutionController {
         def solutionInstance = new Solution()
         solutionInstance.properties = params
 		def dataKeeperInstance = DataKeeper?.get(params.dataKeeper?.id)
-		println dataKeeperInstance
- 
         return [solutionInstance: solutionInstance,dataKeeperInstance:dataKeeperInstance]
     }
 
 	    def save = {
-	/*		params.word=['a','b','c']*/
 			println params
 			params.word.tokenize(',').each { 
 				params.word=it	
 		        def solutionInstance = new Solution(params)
-				println params
 				println solutionInstance
 		        if (solutionInstance.save(flush: true)) {
 		            flash.message = "${message(code: 'default.created.message', args: [message(code: 'solution.label', default: 'Solution'), solutionInstance.id])}"

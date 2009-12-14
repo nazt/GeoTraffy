@@ -47,10 +47,7 @@
                             <td>${fieldValue(bean: experimentInstance, field: "total")}</td>
                         
                             <td>  
-								<g:if test="${experimentInstance.solution.size()>0}">
-									${(experimentInstance.solution.found-[false]).size()}/${experimentInstance.solution.found.size()} = 
-								${(experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float } %									
-								</g:if>	
+								${fieldValue(bean: experimentInstance, field: "correctness")} %
 							</td>
 							<td>${experimentInstance.totalInDict}</td>                        
                             <td><g:formatDate date="${experimentInstance.dateCreated}" /></td>

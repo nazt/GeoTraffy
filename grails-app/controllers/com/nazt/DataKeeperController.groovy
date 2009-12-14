@@ -53,6 +53,16 @@ class DataKeeperController {
 					it.save();
 				}
 			}
+	        def experimentInstance = Experiment.get(dataKeeperInstance.experiment.id)
+			def percent=0
+			if (experimentInstance.solution.size()>0)
+			{
+				percent= (experimentInstance.solution.found-[false]).size()/experimentInstance.solution.found.size()*100 as float 
+				println percent
+			}
+			experimentInstance.correctness=percent
+			experimentInstance.save()					
+			
             [dataKeeperInstance: dataKeeperInstance,diffList: diffList]
         }
     }

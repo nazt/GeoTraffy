@@ -8,6 +8,7 @@ class Experiment {
 	Integer totalInDict
 	Date dateCreated
 	Date lastUpdated	
+	Float correctness=0
     static constraints = {
 		name(unique:true)
     }
